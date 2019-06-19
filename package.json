@@ -1,0 +1,30 @@
+{
+  "name": "elementree-todomvc",
+  "version": "0.1.0",
+  "description": "ToDo MVC written in Elementree",
+  "main": "todomvc.js",
+  "scripts": {
+    "lint": "standard --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elementreejs/example-todomvc.git"
+  },
+  "keywords": [],
+  "author": "Mark Stahl <mjstahl@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elementreejs/example-todomvc/issues"
+  },
+  "homepage": "https://github.com/elementreejs/example-todomvc#readme",
+  "dependencies": {
+    "elementree": "^0.25.9",
+    "todomvc-app-css": "^2.2.0",
+    "todomvc-common": "^1.0.5"
+  },
+  "devDependencies": {
+    "standard": "^12.0.1",
+    "steal": "^2.2.1",
+    "steal-tools": "^2.2.2"
+  }
+}
