@@ -12,7 +12,7 @@ function todomvc (app) {
         ${header(app.todos)}
       </section>
       ${list(todos)}
-      ${footer(todos)}
+      ${footer(app)}
       <footer class="info">
         <p>Double-click to edit a todo</p>
         <p>Created by <a href="https://github.com/mjstahl">Mark Stahl</a></p>

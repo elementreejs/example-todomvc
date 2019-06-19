@@ -1,25 +1,42 @@
-import { prepare, render } from 'elementree'
+import { html, prepare, render } from 'elementree'
 
-function footer (todos) {
+function footer ({ route, todos }) {
   if (!todos.length) return null
+
+  const complete = todos.filter(t => t.complete)
+  const clearComplete = () => {
+    return (complete.length)
+      ? html`<button class="clear-completed">Clear completed</button>`
+      : null
+  }
+  const incomplete = todos.filter(t => !t.completed)
+  const isRouteSelected = (href) => {
+    return ((route === '/' || route === '/#/') && !href) ? 'selected'
+      : (route.includes(href)) ? 'selected' : ''
+  }
   return render`
     <footer class="footer">
-      <!-- This should be '0 items left' by default -->
-      <span class="todo-count"><strong>0</strong> item left</span>
-      <!-- Remove this if you don't implement routing -->
+      <span class="todo-count">
+        <strong>${incomplete.length}</strong> item left
+      </span>
       <ul class="filters">
         <li>
-          <a class="selected" href="#/">All</a>
+          <a class="${isRouteSelected()}" href="#/">
+            All
+          </a>
         </li>
         <li>
-          <a href="#/active">Active</a>
+          <a class="${isRouteSelected('active')}" href="#/active">
+            Active
+          </a>
         </li>
         <li>
-          <a href="#/completed">Completed</a>
+          <a class="${isRouteSelected('completed')}" href="#/completed">
+            Completed
+          </a>
         </li>
       </ul>
-      <!-- Hidden if no completed items are left ↓ -->
-      <button class="clear-completed">Clear completed</button>
+      ${clearComplete()}
     </footer>
   `
 }
