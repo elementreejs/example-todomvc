@@ -10,7 +10,7 @@ function footer ({ route, todos }) {
       : null
   }
   const incomplete = todos.filter(t => !t.completed)
-  const isRouteSelected = (href) => {
+  const isSelected = (href) => {
     return ((route === '/' || route === '/#/') && !href) ? 'selected'
       : (route.includes(href)) ? 'selected' : ''
   }
@@ -21,17 +21,17 @@ function footer ({ route, todos }) {
       </span>
       <ul class="filters">
         <li>
-          <a class="${isRouteSelected()}" href="#/">
+          <a class="${isSelected()}" href="#/">
             All
           </a>
         </li>
         <li>
-          <a class="${isRouteSelected('active')}" href="#/active">
+          <a class="${isSelected('active')}" href="#/active">
             Active
           </a>
         </li>
         <li>
-          <a class="${isRouteSelected('completed')}" href="#/completed">
+          <a class="${isSelected('completed')}" href="#/completed">
             Completed
           </a>
         </li>
