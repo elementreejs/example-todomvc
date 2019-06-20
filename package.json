@@ -4,8 +4,10 @@
   "description": "ToDo MVC written in Elementree",
   "main": "todomvc.js",
   "scripts": {
+    "build": "steal-tools",
+    "develop": "other-index develop.html 8080",
     "lint": "standard --fix",
-    "start": "npx http-server"
+    "start": "other-index index.html 8080"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,7 @@
     "todomvc-common": "^1.0.5"
   },
   "devDependencies": {
+    "@mjstahl/other-index": "^0.2.2",
     "standard": "^12.0.1",
     "steal": "^2.2.1",
     "steal-tools": "^2.2.2"
