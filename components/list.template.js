@@ -14,9 +14,15 @@ function list ({ route, todos }) {
     }
     return t
   })
+
   return render`
     <section class="main">
-      <input id="toggle-all" class="toggle-all" type="checkbox" onclick=${completeAll}>
+      <input
+        id="toggle-all"
+        class="toggle-all"
+        type="checkbox"
+        onclick=${completeAll}
+      />
       <label for="toggle-all">Mark all as complete</label>
       <ul class="todo-list">
         ${filtered.map(renderToDo)}
@@ -24,20 +30,25 @@ function list ({ route, todos }) {
     </section>
   `
 
-  function completeAll () {
-    todos.map(t => t.completed = !t.completed)
-  }
-
   function renderToDo (todo) {
     const completed = (todo.completed) ? 'completed' : ''
     return render`
       <li class="${completed}" ondblclick="${edit}">
         <div class="view">
-          <input class="toggle" type="checkbox" ${!!completed && 'checked'} onclick="${complete(todo)}">
+          <input
+            class="toggle"
+            type="checkbox"
+            onclick="${complete(todo)}"
+            ${!!completed && 'checked'}
+          />
           <label>${todo.text}</label>
           <button class="destroy" onclick=${destroy(todo)}></button>
         </div>
-        <input class="edit" value="${todo.text}" onkeypress="${finished(todo)}">
+        <input class="edit"
+          value="${todo.text}"
+          onkeypress="${finished(todo)}"
+          onblur="${finished(todo)}"
+        />
       </li>
     `
   }
@@ -46,6 +57,10 @@ function list ({ route, todos }) {
     return function () {
       todo.completed = !todo.completed
     }
+  }
+
+  function completeAll () {
+    todos.map(t => t.completed = !t.completed)
   }
 
   function destroy (todo) {
@@ -62,7 +77,9 @@ function list ({ route, todos }) {
 
   function finished (todo) {
     return function (event) {
-      if (event.charCode !== ENTER_KEY) return
+      if (event instanceof KeyboardEvent) {
+        if (event.charCode !== ENTER_KEY) return
+      }
       todo.text = event.currentTarget.value.trim()
     }
   }

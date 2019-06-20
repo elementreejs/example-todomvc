@@ -4,19 +4,23 @@ const ENTER_KEY = 13
 
 function header (todos) {
   return render`
-    <header class="header" onkeypress=${createToDo}>
+    <header class="header" onkeypress=${create}>
       <h1>todos</h1>
-      <input class="new-todo" placeholder="What needs to be done?" autofocus>
+      <input
+        class="new-todo"
+        placeholder="What needs to be done?"
+        autofocus
+      />
     </header>
   `
 
-  function createToDo (event) {
+  function create (event) {
     if (event.charCode !== ENTER_KEY) return
 
     const input = document.querySelector('input.new-todo')
     const text = input.value.trim()
     if (text) {
-      todos.push({ completed: false, editing: false, text })
+      todos.push({ completed: false, text })
     }
     input.value = ''
   }

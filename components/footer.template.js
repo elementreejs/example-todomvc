@@ -3,27 +3,14 @@ import { prepare, render } from 'elementree'
 function footer (app) {
   if (!app.todos.length) return null
 
-  const complete = app.todos.filter(t => t.completed)
-  const clearComplete = () => {
-    return (complete.length)
-      ? render`
-          <button class="clear-completed" onclick=${clear}>
-            Clear completed
-          </button>
-        `
-      : null
-  }
   const incomplete = app.todos.filter(t => !t.completed)
-  const isSelected = (href) => {
-    return ((app.route === '/' || app.route === '/#/') && !href) ? 'selected'
-      : (app.route.includes(href)) ? 'selected' : ''
-  }
-  const plural = incomplete.length === 1 ? '' : 's'
 
   return render`
     <footer class="footer">
       <span class="todo-count">
-        <strong>${incomplete.length}</strong> item${plural} left
+        <strong>
+          ${incomplete.length}
+        </strong> item${incomplete.length === 1 ? '' : 's'} left
       </span>
       <ul class="filters">
         <li>
@@ -48,6 +35,22 @@ function footer (app) {
 
   function clear () {
     app.todos = app.todos.filter(t => !t.completed)
+  }
+
+  function clearComplete () {
+    const complete = app.todos.filter(t => t.completed)
+    return (complete.length)
+      ? render`
+          <button class="clear-completed" onclick=${clear}>
+            Clear completed
+          </button>
+        `
+      : null
+  }
+
+  function isSelected (href) {
+    if ((app.route === '/' || app.route === '/#/') && !href) return 'selected'
+    return (app.route.includes(href)) ? 'selected' : ''
   }
 }
 
