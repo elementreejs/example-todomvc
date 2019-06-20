@@ -4,7 +4,8 @@
   "description": "ToDo MVC written in Elementree",
   "main": "todomvc.js",
   "scripts": {
-    "lint": "standard --fix"
+    "lint": "standard --fix",
+    "start": "npx http-server"
   },
   "repository": {
     "type": "git",

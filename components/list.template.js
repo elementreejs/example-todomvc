@@ -3,6 +3,7 @@ import { prepare, render } from 'elementree'
 
 function list (todos) {
   if (!todos.length) return null
+
   return render`
     <!-- This section should be hidden by default and shown when there are todos -->
     <section class="main">
