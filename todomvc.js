@@ -4,14 +4,16 @@ import header from './components/header.template'
 import list from './components/list.template'
 import footer from './components/footer.template'
 
+import 'node_modules/todomvc-common/base.css'
+import 'node_modules/todomvc-app-css/index.css'
+
 function todomvc (app) {
-  const todos = app.todos.filter(t => true)
   return render`
     <body>
       <section class="todoapp">
         ${header(app.todos)}
       </section>
-      ${list(todos)}
+      ${list(app.todos)}
       ${footer(app)}
       <footer class="info">
         <p>Double-click to edit a todo</p>
