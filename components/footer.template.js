@@ -14,10 +14,12 @@ function footer ({ route, todos }) {
     return ((route === '/' || route === '/#/') && !href) ? 'selected'
       : (route.includes(href)) ? 'selected' : ''
   }
+  const plural = incomplete.length === 1 ? '' : 's'
+
   return render`
     <footer class="footer">
       <span class="todo-count">
-        <strong>${incomplete.length}</strong> item left
+        <strong>${incomplete.length}</strong> item${plural} left
       </span>
       <ul class="filters">
         <li>
