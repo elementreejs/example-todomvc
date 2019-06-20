@@ -1,18 +1,22 @@
-import { html, prepare, render } from 'elementree'
+import { prepare, render } from 'elementree'
 
-function footer ({ route, todos }) {
-  if (!todos.length) return null
+function footer (app) {
+  if (!app.todos.length) return null
 
-  const complete = todos.filter(t => t.complete)
+  const complete = app.todos.filter(t => t.completed)
   const clearComplete = () => {
     return (complete.length)
-      ? html`<button class="clear-completed">Clear completed</button>`
+      ? render`
+          <button class="clear-completed" onclick=${clear}>
+            Clear completed
+          </button>
+        `
       : null
   }
-  const incomplete = todos.filter(t => !t.completed)
+  const incomplete = app.todos.filter(t => !t.completed)
   const isSelected = (href) => {
-    return ((route === '/' || route === '/#/') && !href) ? 'selected'
-      : (route.includes(href)) ? 'selected' : ''
+    return ((app.route === '/' || app.route === '/#/') && !href) ? 'selected'
+      : (app.route.includes(href)) ? 'selected' : ''
   }
   const plural = incomplete.length === 1 ? '' : 's'
 
@@ -41,6 +45,10 @@ function footer ({ route, todos }) {
       ${clearComplete()}
     </footer>
   `
+
+  function clear () {
+    app.todos = app.todos.filter(t => !t.completed)
+  }
 }
 
 export default prepare(footer)
