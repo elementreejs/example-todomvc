@@ -1,8 +1,8 @@
 import { merge, prepare, render } from 'elementree'
 
-import header from './components/header.template'
-import list from './components/list.template'
-import footer from './components/footer.template'
+import header from './components/header.view'
+import list from './components/list.view'
+import footer from './components/footer.view'
 
 import 'node_modules/todomvc-common/base.css'
 import 'node_modules/todomvc-app-css/index.css'
